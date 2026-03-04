@@ -1,0 +1,10 @@
+langchain
+langchain-google-genai
+langchain-chroma
+python-dotenv
+playwright-stealth
+playwright
+beautifulsoup4
+fastapi
+uvicorn
+pydantic
