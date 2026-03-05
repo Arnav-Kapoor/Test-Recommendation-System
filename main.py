@@ -23,8 +23,9 @@ retriever = Chroma(
 ).as_retriever(search_kwargs={"k": 10},search_type='mmr')
 
 llm = ChatGoogleGenerativeAI(
-    model="gemma-3-27b-it",
-    temperature=0.3,    # low temperature for factual, consistent recommendations
+    # model="gemini-2.5-flash",
+    model='gemma-3-27b-it',
+    temperature=0.1,    # low temperature for factual, consistent recommendations
 )
 
 SYSTEM_PROMPT = """You are an expert SHL assessment advisor.
@@ -226,7 +227,7 @@ class AssessmentRecommendation(BaseModel):
     description: str
     job_levels: list[str]
     languages: list[str]
-    assessment_length: str
+    assessment_length: str=""
     test_types: list[str]
     remote_testing: bool
     adaptive_irt: bool
@@ -269,7 +270,7 @@ def recommend(request: RecommendRequest):
                 description=item.get("description", ""),
                 job_levels=item.get("job_levels", []),
                 languages=item.get("languages", []),
-                assessment_length=item.get("assessment_length", ""),
+                assessment_length=item.get("assessment_length", "") or "",
                 test_types=item.get("test_types", []),
                 remote_testing=bool(item.get("remote_testing", False)),
                 adaptive_irt=bool(item.get("adaptive_irt", False)),

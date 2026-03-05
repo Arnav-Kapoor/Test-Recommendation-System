@@ -36,6 +36,7 @@ def load_ground_truth(path: str) -> dict[str, list[str]]:
     ground_truth = defaultdict(list)
     seen_queries = []
     train=pd.read_excel('Gen_AI Dataset.xlsx',sheet_name='Train-Set')
+    # train=train.drop_duplicates(subset='Query')
     for _, row in train.iterrows():
         query = row['Query']
         if query not in ground_truth:
@@ -70,7 +71,7 @@ def evaluate():
     print("-" * 60)
 
     for i, (query, relevant_urls) in enumerate(ground_truth.items(), start=1):
-        if i%28==0:
+        if i%3==0:
             time.sleep(62)
         print(f"[{i}] {query[:80]}...")
 

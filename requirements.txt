@@ -8,3 +8,5 @@ beautifulsoup4
 fastapi
 uvicorn
 pydantic
+openpyxl
+pandas
